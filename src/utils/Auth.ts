@@ -1,7 +1,7 @@
 import { createStorage } from './storage'
 import { type IStorage } from '@/interfaces/IStorage'
 
-export default class Auth {
+class Auth {
   private storage: IStorage
 
   constructor(persistent = false) {
@@ -74,3 +74,5 @@ export default class Auth {
     }
   }
 }
+
+export { Auth }

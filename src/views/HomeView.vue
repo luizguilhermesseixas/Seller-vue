@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import SignIn from '../components/SignIn.vue'
+import UserProfile from '@/components/UserProfile.vue'
 </script>
 
 <template>
   <main>
-    <SignIn />
+    <UserProfile />
   </main>
 </template>
