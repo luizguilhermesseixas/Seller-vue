@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Auth } from '@/utils/Auth'
 import { ref } from 'vue'
-// import { onMounted } from 'vue'
+import { onMounted } from 'vue'
 
 const auth = new Auth()
 const isLoggedIn = ref(auth.isLoggedIn())
@@ -13,15 +13,14 @@ const signOut = function () {
   })
 }
 
-/* onMounted(() => {
-  alert('bem vindo')
-}) */
+onMounted(() => {
+  alert('Login Successful')
+})
 </script>
 
 <template>
   <main>
     <template v-if="isLoggedIn">
-      <p>Login successful!</p>
       <h3>Hi, {{ currentUser && currentUser.email }}</h3>
       <br />
       <nav>
