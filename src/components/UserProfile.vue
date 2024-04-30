@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Auth } from '@/utils/Auth'
 import { ref } from 'vue'
-import { onMounted } from 'vue'
+import LoginMessage from '../components/LoginMessage.vue'
 
 const auth = new Auth()
 const isLoggedIn = ref(auth.isLoggedIn())
 const currentUser = ref(auth.currentUser())
+const successMessage = ref('Login efetuado com sucesso!')
 
 const signOut = function () {
   auth.signOut(() => {
@@ -13,14 +14,16 @@ const signOut = function () {
   })
 }
 
-onMounted(() => {
-  alert('Login Successful')
-})
+setTimeout(() => {
+  successMessage.value = ''
+}, 3000)
 </script>
 
 <template>
   <main>
     <template v-if="isLoggedIn">
+      <!-- message component em caso de sucesso de autenticação -->
+      <LoginMessage :msg="successMessage" />
       <h3>Hi, {{ currentUser && currentUser.email }}</h3>
       <br />
       <nav>
