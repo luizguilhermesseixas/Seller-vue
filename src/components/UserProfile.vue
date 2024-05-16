@@ -23,7 +23,7 @@ setTimeout(() => {
   <main>
     <template v-if="isLoggedIn">
       <!-- message component em caso de sucesso de autenticação -->
-      <LoginMessage :msg="successMessage" />
+      <LoginMessage v-if="successMessage" :msg="successMessage" />
       <h3>Hi, {{ currentUser && currentUser.email }}</h3>
       <br />
       <nav>

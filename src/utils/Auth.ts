@@ -62,7 +62,8 @@ class Auth {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-API-KEY': 'qHH+dy7N9pITXVXS9l+3+jGDDyk='
       },
       body: JSON.stringify(body)
     })
