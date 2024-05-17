@@ -23,7 +23,7 @@ class Auth {
     onSuccess()
   }
 
-  failure(response: Response, onFailure: () => void) {
+  async failure(response: Response, onFailure: () => void) {
     onFailure()
   }
 

@@ -2,6 +2,7 @@
 import { Auth } from '@/utils/Auth'
 import { ref } from 'vue'
 import LoginMessage from '../components/LoginMessage.vue'
+import CreateStore from '../components/CreateStore.vue'
 
 const auth = new Auth()
 const isLoggedIn = ref(auth.isLoggedIn())
@@ -25,6 +26,8 @@ setTimeout(() => {
       <!-- message component em caso de sucesso de autenticação -->
       <LoginMessage v-if="successMessage" :msg="successMessage" />
       <h3>Hi, {{ currentUser && currentUser.email }}</h3>
+      <br />
+      <CreateStore />
       <br />
       <nav>
         <a @click="signOut">Sign Out</a>
