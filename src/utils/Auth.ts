@@ -31,6 +31,10 @@ class Auth {
     return Boolean(this.getFallback('token'))
   }
 
+  getToken() {
+    return this.getFallback('token')
+  }
+
   currentUser() {
     if (!this.isLoggedIn()) {
       return null
