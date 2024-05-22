@@ -1,7 +1,7 @@
 <!--This is a page for a user to create a store.-->
 <script setup lang="ts">
-import { ApiService } from '../utils/ApiService'
-import DefaultMessage from '../components/DefaultMessage.vue'
+import { ApiService } from '../../utils/ApiService'
+import DefaultMessage from '../DefaultMessage.vue'
 
 const apiService = new ApiService()
 

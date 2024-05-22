@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from '@/context/authStore'
 import DefaultMessage from '../components/DefaultMessage.vue'
-import CreateStore from '../components/CreateStore.vue'
+import CreateStore from '../components/store/CreateStore.vue'
 
 const authStore = useAuthStore()
 const isLoggedIn = ref(authStore.auth?.isLoggedIn())
@@ -43,3 +43,4 @@ setTimeout(() => {
     </template>
   </main>
 </template>
+@/context/authStore

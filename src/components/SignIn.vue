@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Auth } from '@/utils/Auth'
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from '@/context/authStore'
 import { useRouter } from 'vue-router'
 import DefaultMessage from '../components/DefaultMessage.vue'
 
@@ -48,3 +47,4 @@ const onSubmit = (event: Event) => {
     <DefaultMessage v-if="message" :msg="message" />
   </main>
 </template>
+@/context/authStore

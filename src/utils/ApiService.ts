@@ -3,24 +3,34 @@
 class ApiService {
   constructor() {}
 
-  async getStores() {
+  private async fetchWithToken(url: string, options: RequestInit = {}) {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token')
 
-    const response = await fetch('http://localhost:3000/stores', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-API-KEY': 'qHH+dy7N9pITXVXS9l+3+jGDDyk=',
-        Authorization: `Bearer ${token}`
-      }
+    const headers = {
+      ...options.headers,
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-API-KEY': 'qHH+dy7N9pITXVXS9l+3GDDyk=',
+      Authorization: `Bearer ${token}`
+    }
+
+    const response = await fetch(url, {
+      ...options,
+      headers
     })
 
     if (!response.ok) {
-      throw new Error('Failed to fetch stores')
-    } else {
-      const data = await response.json()
-      return data
+      throw new Error('Failed to fetch')
     }
+
+    const data = await response.json()
+    return data
+  }
+
+  async getStores() {
+    const response = await this.fetchWithToken('http://localhost:3000/stores')
+
+    return response
   }
 
   async createStore(name: String) {
@@ -30,25 +40,12 @@ class ApiService {
       }
     }
 
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token')
-
-    const response = await fetch('http://localhost:3000/stores', {
+    const response = await this.fetchWithToken('http://localhost:3000/stores', {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-API-KEY': 'qHH+dy7N9pITXVXS9l+3+jGDDyk=',
-        Authorization: `Bearer ${token}`
-      },
       body: JSON.stringify(body)
     })
 
-    if (!response.ok) {
-      throw new Error('Failed to create store')
-    } else {
-      const data = await response.json()
-      return data
-    }
+    return response
   }
 }
 
