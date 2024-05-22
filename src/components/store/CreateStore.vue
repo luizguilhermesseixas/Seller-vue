@@ -1,15 +1,15 @@
 <!--This is a page for a user to create a store.-->
 <script setup lang="ts">
-import { ApiService } from '../../utils/ApiService'
 import DefaultMessage from '../DefaultMessage.vue'
+import { useStoresStore } from '@/context/storesStore'
 
-const apiService = new ApiService()
+const store = useStoresStore()
 
 const storeName = defineModel<string>('storeName', { default: '' })
 const createStoreSuccesMessage = defineModel<string>('message', { default: '' })
 
 const onSubmit = async () => {
-  const data = await apiService.createStore(storeName.value)
+  const data = await store.createStore(storeName.value)
 
   createStoreSuccesMessage.value = `Loja ${data.name} criada com sucesso!`
   storeName.value = ''

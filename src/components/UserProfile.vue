@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useAuthStore } from '@/context/authStore'
 import DefaultMessage from '../components/DefaultMessage.vue'
 import CreateStore from '../components/store/CreateStore.vue'
+import ListStores from '../components/store/ListStores.vue'
 
 const authStore = useAuthStore()
 const isLoggedIn = ref(authStore.auth?.isLoggedIn())
@@ -28,6 +29,7 @@ setTimeout(() => {
       <h3>Hi, {{ currentUser && currentUser.email }}</h3>
       <br />
       <CreateStore />
+      <ListStores />
       <br />
       <nav>
         <a @click="signOut">Sign Out</a>
