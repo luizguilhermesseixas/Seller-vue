@@ -1,6 +1,6 @@
 <script lang="'ts'">
 export default {
-  name: 'LoginMessage',
+  name: 'DefaultMessage',
   props: {
     msg: {
       type: String

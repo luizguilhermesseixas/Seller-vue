@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Auth } from '@/utils/Auth'
 import { ref } from 'vue'
-import LoginMessage from '../components/LoginMessage.vue'
+import { useAuthStore } from '@/store/authStore'
+import DefaultMessage from '../components/DefaultMessage.vue'
 import CreateStore from '../components/CreateStore.vue'
 
-const auth = new Auth()
-const isLoggedIn = ref(auth.isLoggedIn())
-const currentUser = ref(auth.currentUser())
+const authStore = useAuthStore()
+const isLoggedIn = ref(authStore.auth?.isLoggedIn())
+const currentUser = ref(authStore.auth?.currentUser())
 const successMessage = ref('Login efetuado com sucesso!')
 
 const signOut = function () {
-  auth.signOut(() => {
-    isLoggedIn.value = auth.isLoggedIn()
+  authStore.auth?.signOut(() => {
+    isLoggedIn.value = authStore.auth?.isLoggedIn()
   })
 }
 
@@ -24,7 +24,7 @@ setTimeout(() => {
   <main>
     <template v-if="isLoggedIn">
       <!-- message component em caso de sucesso de autenticação -->
-      <LoginMessage v-if="successMessage" :msg="successMessage" />
+      <DefaultMessage v-if="successMessage" :msg="successMessage" />
       <h3>Hi, {{ currentUser && currentUser.email }}</h3>
       <br />
       <CreateStore />

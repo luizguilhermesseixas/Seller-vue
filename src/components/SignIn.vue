@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { Auth } from '@/utils/Auth'
-// import { ref } from 'vue'
+import { useAuthStore } from '@/store/authStore'
 import { useRouter } from 'vue-router'
-import LoginMessage from '../components/LoginMessage.vue'
+import DefaultMessage from '../components/DefaultMessage.vue'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const email = defineModel<string>('email', { default: '' })
 const password = defineModel<string>('password', { default: '' })
@@ -12,16 +13,15 @@ const remember = defineModel<boolean>('remember', { default: false })
 const message = defineModel<string>('message', { default: '' })
 
 const onSubmit = (event: Event) => {
-  let auth = new Auth(remember.value)
+  authStore.initializeAuth(remember.value)
 
-  auth.signIn(
+  authStore.auth?.signIn(
     email.value,
     password.value,
     () => {
       router.push('/')
     },
     () => {
-      console.log('não foi dessa vez!')
       message.value = 'Email ou senha inválidos'
     }
   )
@@ -45,6 +45,6 @@ const onSubmit = (event: Event) => {
       <button type="submit">Sign In</button>
     </form>
     <!-- message component em caso de erro de autenticação -->
-    <LoginMessage v-if="message" :msg="message" />
+    <DefaultMessage v-if="message" :msg="message" />
   </main>
 </template>
