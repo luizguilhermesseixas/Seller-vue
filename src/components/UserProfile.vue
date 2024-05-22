@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { useAuthStore } from '@/context/authStore'
 import DefaultMessage from '../components/DefaultMessage.vue'
-import CreateStore from '../components/store/CreateStore.vue'
-import ListStores from '../components/store/ListStores.vue'
+// import CreateStores from '../components/store/CreateStores.vue'
+// import ListStores from '../components/store/ListStores.vue'
 
 const authStore = useAuthStore()
 const isLoggedIn = ref(authStore.auth?.isLoggedIn())
@@ -26,23 +26,21 @@ setTimeout(() => {
     <template v-if="isLoggedIn">
       <!-- message component em caso de sucesso de autenticação -->
       <DefaultMessage v-if="successMessage" :msg="successMessage" />
-      <h3>Hi, {{ currentUser && currentUser.email }}</h3>
-      <br />
-      <CreateStore />
-      <ListStores />
+      <h3>Olá, {{ currentUser && currentUser.email }}!</h3>
+
       <br />
       <nav>
-        <a @click="signOut">Sign Out</a>
+        <RouterLink :to="{ name: 'stores' }"> Lojas </RouterLink>
+        <a @click="signOut">Sair</a>
       </nav>
     </template>
 
     <template v-else>
-      <h3>Hello! To have access, please Sign In!</h3>
+      <h3>Olá, faça login para ter acesso.</h3>
       <br />
       <nav>
-        <RouterLink :to="{ name: 'signin' }"> Sign In </RouterLink>
+        <RouterLink :to="{ name: 'signin' }"> Login </RouterLink>
       </nav>
     </template>
   </main>
 </template>
-@/context/authStore

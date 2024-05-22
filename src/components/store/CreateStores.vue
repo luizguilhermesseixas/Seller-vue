@@ -22,7 +22,7 @@ const onSubmit = async () => {
 
 <template>
   <main>
-    <h1>Create Store</h1>
+    <h1>Create stores</h1>
     <DefaultMessage v-if="createStoreSuccesMessage" :msg="createStoreSuccesMessage" />
 
     <form action="" @submit.prevent="onSubmit">

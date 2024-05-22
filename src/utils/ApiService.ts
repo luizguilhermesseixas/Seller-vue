@@ -1,7 +1,17 @@
 // Objective: Create a service to handle all the API calls.
 
 class ApiService {
-  constructor() {}
+  private static instance: ApiService
+
+  private constructor() {}
+
+  public static getInstance() {
+    if (!ApiService.instance) {
+      ApiService.instance = new ApiService()
+    }
+
+    return ApiService.instance
+  }
 
   private async fetchWithToken(url: string, options: RequestInit = {}) {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token')
@@ -49,4 +59,6 @@ class ApiService {
   }
 }
 
-export { ApiService }
+const apiService = ApiService.getInstance()
+
+export { apiService }
