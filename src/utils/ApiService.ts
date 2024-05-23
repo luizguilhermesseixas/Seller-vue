@@ -57,6 +57,21 @@ class ApiService {
 
     return response
   }
+
+  async updateStore(id: number, newName: String) {
+    const body = {
+      store: {
+        name: newName
+      }
+    }
+
+    const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(body)
+    })
+
+    return response
+  }
 }
 
 const apiService = ApiService.getInstance()

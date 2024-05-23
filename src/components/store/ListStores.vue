@@ -12,7 +12,7 @@ onMounted(() => {
 
 <template>
   <main>
-    <h1>Obter Lojas</h1>
+    <h1>Suas Lojas</h1>
     <div v-for="item in store.stores" :key="item.id">
       <h2>{{ item.name }}</h2>
     </div>

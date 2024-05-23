@@ -22,14 +22,14 @@ const onSubmit = async () => {
 
 <template>
   <main>
-    <h1>Create stores</h1>
+    <h1>CRIAR NOVA LOJA</h1>
     <DefaultMessage v-if="createStoreSuccesMessage" :msg="createStoreSuccesMessage" />
 
     <form action="" @submit.prevent="onSubmit">
-      <label for="storeName">Store Name: </label><br />
+      <label for="storeName">NOME DA NOVA LOJA</label><br />
       <input type="text" id="storeName" v-model="storeName" required /><br />
 
-      <button type="submit">Create Store</button>
+      <button type="submit">CRIAR</button>
     </form>
   </main>
 </template>
