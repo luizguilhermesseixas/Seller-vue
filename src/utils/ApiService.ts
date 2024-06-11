@@ -20,7 +20,7 @@ class ApiService {
       ...options.headers,
       accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-API-KEY': 'qHH+dy7N9pITXVXS9l+3GDDyk=',
+      'X-API-KEY': 'qHH+dy7N9pITXVXS9l+3+jGDDyk=',
       Authorization: `Bearer ${token}`
     }
 
@@ -39,6 +39,12 @@ class ApiService {
 
   async getStores() {
     const response = await this.fetchWithToken('http://localhost:3000/stores')
+
+    return response
+  }
+
+  async getStoreById(id: number) {
+    const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}`)
 
     return response
   }
@@ -68,6 +74,14 @@ class ApiService {
     const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}`, {
       method: 'PUT',
       body: JSON.stringify(body)
+    })
+
+    return response
+  }
+
+  async destroyStore(id: number) {
+    const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}`, {
+      method: 'DELETE'
     })
 
     return response
