@@ -26,9 +26,6 @@ export const useStoresStore = defineStore('stores', {
       const updatedStore = await apiService.updateStore(id, newName)
       const storeIndex = this.stores.findIndex((store) => store.id === id)
       this.stores[storeIndex] = updatedStore
-      if (this.currentStore?.id === id) {
-        this.currentStore = updatedStore
-      }
       return updatedStore
     },
 

@@ -86,6 +86,77 @@ class ApiService {
 
     return response
   }
+
+  async getProducts(id: number) {
+    const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}/products`)
+
+    console.log(response.result.products)
+
+    return response.result.products
+  }
+
+  async createProduct(
+    storeId: number,
+    title: string,
+    description: string,
+    price: number,
+    image: string
+  ) {
+    const body = {
+      product: {
+        title,
+        description,
+        price,
+        image
+      }
+    }
+
+    const response = await this.fetchWithToken(`http://localhost:3000/stores/${storeId}/products`, {
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+
+    return response
+  }
+
+  async updateProduct(
+    storeId: number,
+    productId: number,
+    title: string,
+    description: string,
+    price: number,
+    image: string
+  ) {
+    const body = {
+      product: {
+        title,
+        description,
+        price,
+        image
+      }
+    }
+
+    const response = await this.fetchWithToken(
+      `http://localhost:3000/stores/${storeId}/products/${productId}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(body)
+      }
+    )
+
+    return response
+  }
+
+  async destroyProduct(storeId: number, productId: number) {
+    const response = await this.fetchWithToken(
+      `http://localhost:3000/stores/${storeId}/products/${productId}`,
+      {
+        method: 'DELETE'
+      }
+    )
+
+    return response
+  }
 }
 
 const apiService = ApiService.getInstance()
