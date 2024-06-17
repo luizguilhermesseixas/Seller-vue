@@ -18,6 +18,10 @@ onMounted(async () => {
 })
 
 const products = computed(() => productsStore.products)
+
+const detailsProduct = (productId: number) => {
+  router.push(`/stores/${storeId.value}/products/${productId}`)
+}
 </script>
 
 <template>
@@ -27,6 +31,8 @@ const products = computed(() => productsStore.products)
       <h2>{{ item.title }}</h2>
       <p>{{ item.description }}</p>
       <p>{{ item.price }}</p>
+      <img :src="item.image_urls?.thumbnail_url" alt="Thumbnail do Produto." />
+      <button type="button" @click="detailsProduct(item.id)">Detalhes</button>
     </div>
   </main>
 </template>

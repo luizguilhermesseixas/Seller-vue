@@ -11,7 +11,7 @@ onMounted(() => {
   store.getStores()
 })
 
-const storeProfile = (id: number) => {
+const detailsStore = (id: number) => {
   router.push(`/stores/${id}`)
 }
 
@@ -26,7 +26,7 @@ const destroyStore = async (id: number) => {
     <h1>Suas Lojas</h1>
     <div v-for="item in store.stores" :key="item.id">
       <h2>{{ item.name }}</h2>
-      <button type="button" @click="storeProfile(item.id)">Acessar</button>
+      <button type="button" @click="detailsStore(item.id)">Detalhes</button>
       <button type="button" @click="destroyStore(item.id)">Excluir</button>
     </div>
   </main>

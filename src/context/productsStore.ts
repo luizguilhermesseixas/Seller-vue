@@ -8,8 +8,6 @@ export const useProductsStore = defineStore('products', {
   actions: {
     async getProducts(storeId: number) {
       this.products = await apiService.getProducts(storeId)
-      console.log('euuuu', this.products)
-      return this.products
     }
   }
 })

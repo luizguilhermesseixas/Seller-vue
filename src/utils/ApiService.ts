@@ -90,8 +90,6 @@ class ApiService {
   async getProducts(id: number) {
     const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}/products`)
 
-    console.log(response.result.products)
-
     return response.result.products
   }
 

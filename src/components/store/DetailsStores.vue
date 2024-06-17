@@ -17,6 +17,10 @@ onMounted(async () => {
   currentStore.value = data.name
 })
 
+const storeProducts = () => {
+  router.push(`/stores/${storeId}/products`)
+}
+
 // const currentStore = computed(() => store.currentStore)
 </script>
 
@@ -24,7 +28,7 @@ onMounted(async () => {
   <main>
     <h1>Detalhes da Loja</h1>
     <h2>{{ currentStore }}</h2>
+    <button type="button" @click="storeProducts">Ver Produtos</button>
     <EditStores />
-    <ListProducts />
   </main>
 </template>
