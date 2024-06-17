@@ -93,6 +93,14 @@ class ApiService {
     return response.result.products
   }
 
+  async getProductById(storeId: number, productId: number) {
+    const response = await this.fetchWithToken(
+      `http://localhost:3000/stores/${storeId}/products/${productId}`
+    )
+
+    return response
+  }
+
   async createProduct(
     storeId: number,
     title: string,
