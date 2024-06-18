@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { type INewProduct } from '../../interfaces/IProduct'
-import DefaultMessage from '../DefaultMessage.vue'
+// import DefaultMessage from '../DefaultMessage.vue'
 import { useRouter } from 'vue-router'
 import { useProductsStore } from '../../context/productsStore'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const router = useRouter()
 const productsStore = useProductsStore()
 
 const storeId = computed(() => router.currentRoute.value.params.id)
-const productId = computed(() => router.currentRoute.value.params.productId)
 
 const newTitle = defineModel<string>('newTitle', { default: '' })
 const newDescription = defineModel<string>('newDescription', { default: '' })
 const newPrice = defineModel<number>('newPrice', { default: 0 })
 const newImage = ref<File | null>(null)
-const updatedProductMessage = defineModel<string>('message', { default: '' })
 
 const handleImageChange = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -24,7 +22,7 @@ const handleImageChange = (event: Event) => {
   }
 }
 
-const onSubmit = () => {
+const onSubmit = async () => {
   const newProduct: INewProduct = {
     title: newTitle.value,
     description: newDescription.value,
@@ -32,26 +30,19 @@ const onSubmit = () => {
     image: newImage.value || ''
   }
 
-  productsStore.updateProduct(Number(storeId.value), Number(productId.value), newProduct)
-
-  updatedProductMessage.value = `Produto ${newProduct.title} atualizado com sucesso!`
+  await productsStore.createProduct(Number(storeId.value), newProduct)
 
   newTitle.value = ''
   newDescription.value = ''
   newPrice.value = 0
   newImage.value = null
-
-  setTimeout(() => {
-    updatedProductMessage.value = ''
-  }, 3000)
 }
 </script>
 
 <template>
   <main>
     <div>
-      <h1>Editar Produto</h1>
-      <DefaultMessage v-if="updatedProductMessage" :msg="updatedProductMessage" />
+      <h1>Criar Produto</h1>
       <form action="" @submit.prevent="onSubmit">
         <label for="title">Título</label><br />
         <input type="text" placeholder="..." id="title" v-model="newTitle" required /><br />
@@ -61,31 +52,13 @@ const onSubmit = () => {
         ><br />
 
         <label for="price">Preço</label><br />
-        <input
-          type="number"
-          min="0"
-          step="0.001"
-          placeholder="..."
-          id="price"
-          v-model="newPrice"
-          required
-        /><br />
+        <input type="number" id="price" v-model="newPrice" min="0" step="0.001" required /><br />
 
         <label for="image">Imagem</label><br />
         <input type="file" id="image" @change="handleImageChange" required /><br />
 
-        <button type="submit">Salvar</button>
+        <button type="submit">Criar</button>
       </form>
     </div>
   </main>
 </template>
-
-<style scoped>
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-}
-</style>

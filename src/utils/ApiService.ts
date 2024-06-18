@@ -44,15 +44,12 @@ class ApiService {
   async getStores(): Promise<IStore[]> {
     const response = await this.fetchWithToken('http://localhost:3000/stores')
 
-    console.log('Todas as Lojas', response)
-
     return response
   }
 
   async getStoreById(id: number): Promise<IStore> {
     const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}`)
 
-    console.log('Loja por id', response)
     return response
   }
 
@@ -97,8 +94,6 @@ class ApiService {
   async getProducts(id: number): Promise<IProduct[]> {
     const response = await this.fetchWithToken(`http://localhost:3000/stores/${id}/products`)
 
-    console.log('Todos os Produtos', response)
-
     return response.result.products
   }
 
@@ -107,25 +102,23 @@ class ApiService {
       `http://localhost:3000/stores/${storeId}/products/${productId}`
     )
 
-    console.log('Produto por id', response)
-
     return response
   }
 
   async createProduct(storeId: number, newProduct: INewProduct): Promise<IProduct> {
-    const body = {
-      product: {
-        title: newProduct.title,
-        description: newProduct.description,
-        price: newProduct.price,
-        image: newProduct.image
-      }
-    }
+    const formData = new FormData()
+
+    formData.append('product[title]', newProduct.title)
+    formData.append('product[description]', newProduct.description)
+    formData.append('product[price]', newProduct.price.toString())
+    formData.append('product[image]', newProduct.image)
 
     const response = await this.fetchWithToken(`http://localhost:3000/stores/${storeId}/products`, {
       method: 'POST',
-      body: JSON.stringify(body)
+      body: formData
     })
+
+    console.log('Produto criado!', response)
 
     return response
   }
@@ -150,8 +143,6 @@ class ApiService {
       }
     )
 
-    console.log('Produto Atualizado', response)
-
     return response
   }
 
@@ -162,8 +153,6 @@ class ApiService {
         method: 'DELETE'
       }
     )
-
-    console.log('Produto Deletado', response)
 
     return response
   }

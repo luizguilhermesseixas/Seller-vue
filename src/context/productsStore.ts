@@ -14,6 +14,11 @@ export const useProductsStore = defineStore('products', {
     async getProductById(storeId: number, productId: number): Promise<void> {
       this.currentProduct = await apiService.getProductById(storeId, productId)
     },
+    async createProduct(storeId: number, newProduct: INewProduct): Promise<IProduct> {
+      const createdProduct = await apiService.createProduct(storeId, newProduct)
+      await this.getProducts(storeId)
+      return createdProduct
+    },
     async updateProduct(
       storeId: number,
       productId: number,
