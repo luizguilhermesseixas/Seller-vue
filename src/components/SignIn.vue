@@ -43,8 +43,11 @@ const onSubmit = (event: Event) => {
 
       <button type="submit">Sign In</button>
     </form>
+    <div>
+      <p>Don't Have an Account?</p>
+      <nav><RouterLink :to="{ name: 'signup' }">Sign Up</RouterLink></nav>
+    </div>
     <!-- message component em caso de erro de autenticação -->
     <DefaultMessage v-if="message" :msg="message" />
   </main>
 </template>
-@/context/authStore

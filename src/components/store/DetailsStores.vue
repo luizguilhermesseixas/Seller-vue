@@ -26,9 +26,30 @@ const storeProducts = () => {
 
 <template>
   <main>
-    <h1>Detalhes da Loja</h1>
-    <h2>{{ currentStore }}</h2>
-    <button type="button" @click="storeProducts">Ver Produtos</button>
-    <EditStores />
+    <div>
+      <h1>Detalhes da Loja</h1>
+      <h2>{{ currentStore }}</h2>
+      <button type="button" @click="storeProducts">Ver Produtos</button>
+    </div>
+    <div>
+      <EditStores />
+    </div>
   </main>
 </template>
+
+<style scoped>
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 20px; /* adiciona espaço entre os elementos filhos */
+  padding: 20px; /* adiciona espaço ao redor do elemento */
+  width: 80%; /* define a largura do elemento para 80% da largura do viewport */
+  margin: 50px auto; /* centraliza o elemento horizontalmente */
+}
+h1 {
+  white-space: nowrap;
+}
+</style>

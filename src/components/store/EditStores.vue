@@ -26,16 +26,18 @@ const onSubmit = async () => {
 
 <template>
   <main>
-    <h1>EDITAR LOJA</h1>
     <DefaultMessage v-if="updatedStoreMessage" :msg="updatedStoreMessage" />
-    <form action="" @submit.prevent="onSubmit">
-      <label for="newName">Novo Nome</label><br />
-      <input type="text" placeholder="..." id="newName" v-model="newName" required /><br />
+    <div>
+      <h1>EDITAR LOJA</h1>
+      <form action="" @submit.prevent="onSubmit">
+        <label for="newName">Novo Nome</label><br />
+        <input type="text" placeholder="..." id="newName" v-model="newName" required /><br />
 
-      <button type="submit">Salvar</button>
-    </form>
-    <nav>
-      <router-link to="/stores">Voltar</router-link>
-    </nav>
+        <button type="submit">Salvar</button>
+      </form>
+      <nav>
+        <router-link to="/stores">Voltar</router-link>
+      </nav>
+    </div>
   </main>
 </template>
